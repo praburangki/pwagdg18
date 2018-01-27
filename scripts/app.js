@@ -18,7 +18,7 @@
   //   name: 'Barcelona, FCB',
   //   icon: 'barca',
   //   currently: {
-  //     updatedAt: 1453489481,
+  //     updatedAt: 1517059723,
   //     position: '1st',
   //     wins: 16,
   //     draws: 3,
