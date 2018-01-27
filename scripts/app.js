@@ -60,9 +60,11 @@
     var select = document.getElementById('selectTeamToAdd');
     var selected = select.options[select.selectedIndex];
     var key = selected.value;
-    var label = selected.textContent;
-    app.getTeam(key, label);
-    app.selectedTeams.push({ key: key, label: label });
+    var name = selected.textContent;
+    app.getTeam(key, name);
+    app.selectedTeams.push({ key: key, name: name });
+    // Update Me
+    // app.saveSelectedTeams();
     app.toggleAddDialog(false);
   });
 
@@ -93,7 +95,7 @@
    ****************************************************************************/
 
   // Gets a team for a specific name and update the card with the data
-  app.getTeam = function(key, label) {
+  app.getTeam = function(key, name) {
     var url = apiBase + key + '.json';
     // Make the XHR to get the data, then update the card
     var request = new XMLHttpRequest();
@@ -102,7 +104,7 @@
         if (request.status === 200) {
           var response = JSON.parse(request.response);
           response.key = key;
-          response.label = label;
+          response.name = name;
           app.updateTeamCard(response);
         }
       }
@@ -118,6 +120,11 @@
       app.getTeam(key);
     });
   };
+
+  // Update Me
+  // app.saveSelectedTeams = function() {
+  //   window.localforage.setItem('selectedTeams', app.selectedTeams);
+  // }
 
   app.updateTeamCard = function(data) {
     var card = app.visibleCards[data.key];
@@ -158,6 +165,23 @@
       app.isLoading = false;
     }
   };
-
   app.updateTeamCard(injectedTeam);
+  
+  // Update Me
+  // document.addEventListener('DOMContentLoaded', function() {
+  //   window.localforage.getItem('selectedTeams', function(err, teamList) {
+  //     if (teamList) {
+  //       app.selectedTeams = teamList;
+  //       app.selectedTeams.forEach(function(team) {
+  //         app.getTeam(team.key, team.name);
+  //       });
+  //     } else {
+  //       app.updateTeamCard(injectedTeam);
+  //       app.selectedTeams = [
+  //         { key: injectedTeam.key, name: injectedTeam.name }
+  //       ];
+  //       app.saveSelectedTeams();
+  //     }
+  //   });
+  // });
 })();
