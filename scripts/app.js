@@ -30,16 +30,94 @@
         { icon: 'delrey', total: 29 },
         { icon: 'ucl', total: 5 },
         { icon: 'uefa', total: 0 },
-        { icon: 'fifa', total: 3 },
+        { icon: 'fifa', total: 3 }
       ]
     }
-  }
+  };
+
+  var apiBase =
+    'https://raw.githubusercontent.com/praburangki/pwagdg18/master/data/';
+
+  /*****************************************************************************
+   *
+   * Event listeners for UI elements
+   *
+   ****************************************************************************/
+
+  /* Event listener for refresh button */
+  document.getElementById('btnRefresh').addEventListener('click', function() {
+    app.updateTeams();
+  });
+
+  /* Event listener for add new team button */
+  document.getElementById('btnAdd').addEventListener('click', function() {
+    // Open/show the add new team dialog
+    app.toggleAddDialog(true);
+  });
+
+  /* Event listener for add team button in add team dialog */
+  document.getElementById('btnAddTeam').addEventListener('click', function() {
+    var select = document.getElementById('selectTeamToAdd');
+    var selected = select.options[select.selectedIndex];
+    var key = selected.value;
+    var label = selected.textContent;
+    app.getTeam(key, label);
+    app.selectedTeams.push({ key: key, label: label });
+    app.toggleAddDialog(false);
+  });
+
+  /* Event listener for cancel button in add team dialog */
+  document.getElementById('btnAddCancel').addEventListener('click', function() {
+    app.toggleAddDialog(false);
+  });
 
   /*****************************************************************************
    *
    * Methods to update/refresh the UI
    *
    ****************************************************************************/
+
+  // Toggles the visibility of the add new team dialog.
+  app.toggleAddDialog = function(visible) {
+    if (visible) {
+      app.addDialog.classList.add('dialog-container--visible');
+    } else {
+      app.addDialog.classList.remove('dialog-container--visible');
+    }
+  };
+
+  /*****************************************************************************
+   *
+   * Methods for dealing with the model
+   *
+   ****************************************************************************/
+
+  // Gets a team for a specific name and update the card with the data
+  app.getTeam = function(key, label) {
+    var url = apiBase + key + '.json';
+    // Make the XHR to get the data, then update the card
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+      if (request.readyState === XMLHttpRequest.DONE) {
+        if (request.status === 200) {
+          var response = JSON.parse(request.response);
+          response.key = key;
+          response.label = label;
+          app.updateTeamCard(response);
+        }
+      }
+    };
+    request.open('GET', url);
+    request.send();
+  };
+
+  // Iterate all of the cards and attempt to get the latest team data
+  app.updateTeams = function() {
+    var keys = Object.keys(app.visibleCards);
+    keys.forEach(function(key) {
+      app.getTeam(key);
+    });
+  };
 
   app.updateTeamCard = function(data) {
     var card = app.visibleCards[data.key];
@@ -53,13 +131,17 @@
       app.visibleCards[data.key] = card;
     }
 
-    card.querySelector('.updatedAt .value').textContent = new Date(data.currently.updatedAt * 1000);
+    card.querySelector('.updatedAt .value').textContent = new Date(
+      data.currently.updatedAt * 1000
+    );
     card.querySelector('.current .icon').classList.add(data.icon);
-    card.querySelector('.current .position').textContent = data.currently.position;
+    card.querySelector('.current .position').textContent =
+      data.currently.position;
     card.querySelector('.current .wins').textContent = data.currently.wins;
     card.querySelector('.current .draws').textContent = data.currently.draws;
     card.querySelector('.current .losses').textContent = data.currently.losses;
-    card.querySelector('.current .goaldiff').textContent = data.currently.goaldiff;
+    card.querySelector('.current .goaldiff').textContent =
+      data.currently.goaldiff;
 
     var histories = card.querySelectorAll('.history .competition');
     for (var i = 0; i < 5; i++) {
@@ -75,9 +157,6 @@
       app.spinner.setAttribute('hidden', true);
       app.isLoading = false;
     }
-  }
-  
+  };
   // app.updateTeamCard(injectedTeam);
 })();
-
-
