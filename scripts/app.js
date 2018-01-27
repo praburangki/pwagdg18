@@ -12,28 +12,29 @@
     competitions: ['League', 'Cup', 'Champions', 'Europa', 'FIFA']
   };
 
-  var injectedTeam = {
-    key: 'barcelona',
-    name: 'Barcelona, FCB',
-    icon: 'barca',
-    currently: {
-      updatedAt: 1453489481,
-      position: '1st',
-      wins: 16,
-      draws: 3,
-      losses: 0,
-      goaldiff: 43
-    },
-    histories: {
-      data: [
-        { icon: 'laliga', total: 24 },
-        { icon: 'delrey', total: 29 },
-        { icon: 'ucl', total: 5 },
-        { icon: 'uefa', total: 0 },
-        { icon: 'fifa', total: 3 }
-      ]
-    }
-  };
+  // Update Me
+  // var injectedTeam = {
+  //   key: 'barca',
+  //   name: 'Barcelona, FCB',
+  //   icon: 'barca',
+  //   currently: {
+  //     updatedAt: 1453489481,
+  //     position: '1st',
+  //     wins: 16,
+  //     draws: 3,
+  //     losses: 0,
+  //     goaldiff: 43
+  //   },
+  //   histories: {
+  //     data: [
+  //       { icon: 'laliga', total: 24 },
+  //       { icon: 'delrey', total: 29 },
+  //       { icon: 'ucl', total: 5 },
+  //       { icon: 'uefa', total: 0 },
+  //       { icon: 'fifa', total: 3 }
+  //     ]
+  //   }
+  // };
 
   var apiBase =
     'https://raw.githubusercontent.com/praburangki/pwagdg18/master/data/';
@@ -158,5 +159,6 @@
       app.isLoading = false;
     }
   };
+  // Update Me
   // app.updateTeamCard(injectedTeam);
 })();
