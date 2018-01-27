@@ -96,6 +96,18 @@
   // Gets a team for a specific name and update the card with the data
   app.getTeam = function(key, name) {
     var url = apiBase + key + '.json';
+    // Update Me
+    if ('caches' in window) { // check if caches exists in browser
+      caches.match(url).then(function(response) { // request data from cache
+        if (response) { // update team with response
+          response.json().then(function(json) {
+            json.key = key;
+            json.name = name;
+            app.updateTeamCard(json);
+          });
+        }
+      });
+    }
     // Make the XHR to get the data, then update the card
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
@@ -136,7 +148,15 @@
       app.visibleCards[data.key] = card;
     }
 
-    card.querySelector('.updatedAt .value').textContent = new Date(
+    // Update me
+    // Verify data is newer than what we already have, if not, skip.
+    var dateElem = card.querySelector('.updatedAt .value');
+    if (dateElem.getAttribute('data-dt') >= data.currently.updatedAt) {
+      return;
+    }
+
+    dateElem.setAttribute('data-dt', data.currently.updatedAt);
+    dateElem.textContent = new Date(
       data.currently.updatedAt * 1000
     );
     card.querySelector('.current .icon').classList.add(data.icon);
@@ -181,12 +201,12 @@
     });
   });
 
-  // Update Me
-  // if ('serviceWorker' in navigator) {
-  //   navigator.serviceWorker
-  //     .register('/sw.js')
-  //     .then(function() {
-  //       console.log('Service Worker Registered');
-  //     });
-  // }
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+      .register('/sw.js')
+      .then(function() {
+        console.log('Service Worker Registered');
+      });
+  }
+
 })();
