@@ -165,23 +165,21 @@
       app.isLoading = false;
     }
   };
-  app.updateTeamCard(injectedTeam);
-  
-  // Update Me
-  // document.addEventListener('DOMContentLoaded', function() {
-  //   window.localforage.getItem('selectedTeams', function(err, teamList) {
-  //     if (teamList) {
-  //       app.selectedTeams = teamList;
-  //       app.selectedTeams.forEach(function(team) {
-  //         app.getTeam(team.key, team.name);
-  //       });
-  //     } else {
-  //       app.updateTeamCard(injectedTeam);
-  //       app.selectedTeams = [
-  //         { key: injectedTeam.key, name: injectedTeam.name }
-  //       ];
-  //       app.saveSelectedTeams();
-  //     }
-  //   });
-  // });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    window.localforage.getItem('selectedTeams', function(err, teamList) {
+      if (teamList) {
+        app.selectedTeams = teamList;
+        app.selectedTeams.forEach(function(team) {
+          app.getTeam(team.key, team.name);
+        });
+      } else {
+        app.updateTeamCard(injectedTeam);
+        app.selectedTeams = [
+          { key: injectedTeam.key, name: injectedTeam.name }
+        ];
+        app.saveSelectedTeams();
+      }
+    });
+  });
 })();
