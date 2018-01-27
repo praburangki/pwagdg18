@@ -158,6 +158,6 @@
       app.isLoading = false;
     }
   };
-  
+
   app.updateTeamCard(injectedTeam);
 })();
