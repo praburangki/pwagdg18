@@ -4,18 +4,18 @@
   "icon": "realmadrid",
   "currently": {
     "updatedAt": 1453489481,
-    "position": "4st",
-    "wins": 16,
-    "draws": 3,
-    "losses": 0,
-    "goaldiff": 43
+    "position": "4th",
+    "wins": 10,
+    "draws": 5,
+    "losses": 4,
+    "goaldiff": 21
   },
   "histories": {
     "data": [
-      { "icon": "laliga", "total": 24 },
-      { "icon": "delrey", "total": 29 },
-      { "icon": "ucl", "total": 5 },
-      { "icon": "uefa", "total": 0 },
+      { "icon": "laliga", "total": 33 },
+      { "icon": "delrey", "total": 19 },
+      { "icon": "ucl", "total": 12 },
+      { "icon": "uefa", "total": 2 },
       { "icon": "fifa", "total": 3 }
     ]
   }
