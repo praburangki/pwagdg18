@@ -63,8 +63,7 @@
     var name = selected.textContent;
     app.getTeam(key, name);
     app.selectedTeams.push({ key: key, name: name });
-    // Update Me
-    // app.saveSelectedTeams();
+    app.saveSelectedTeams();
     app.toggleAddDialog(false);
   });
 
@@ -121,10 +120,9 @@
     });
   };
 
-  // Update Me
-  // app.saveSelectedTeams = function() {
-  //   window.localforage.setItem('selectedTeams', app.selectedTeams);
-  // }
+  app.saveSelectedTeams = function() {
+    window.localforage.setItem('selectedTeams', app.selectedTeams);
+  }
 
   app.updateTeamCard = function(data) {
     var card = app.visibleCards[data.key];
@@ -165,7 +163,7 @@
       app.isLoading = false;
     }
   };
-
+  
   document.addEventListener('DOMContentLoaded', function() {
     window.localforage.getItem('selectedTeams', function(err, teamList) {
       if (teamList) {
@@ -182,4 +180,13 @@
       }
     });
   });
+
+  // Update Me
+  // if ('serviceWorker' in navigator) {
+  //   navigator.serviceWorker
+  //     .register('/sw.js')
+  //     .then(function() {
+  //       console.log('Service Worker Registered');
+  //     });
+  // }
 })();
