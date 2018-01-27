@@ -8,7 +8,7 @@ body {
   margin: 0;
   height: 100%;
   width: 100%;
-  font-family: 'Helvetica', 'Verdana', sans-serif;
+  font-family: 'Product Sans', 'Helvetica', 'Verdana', sans-serif;
   font-weight: 400;
   font-display: optional;
   color: #444;
@@ -118,7 +118,6 @@ body {
   -ms-flex: 1;
   flex: 1;
 }
-
 .loader {
   left: 50%;
   top: 50%;
@@ -193,5 +192,204 @@ body {
     stroke-dashoffset: -65.973;
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
+  }
+}
+
+.main {
+  padding-top: 60px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dialog-container {
+  background: rgba(0, 0, 0, 0.57);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity;
+  -webkit-transition: opacity 0.333s cubic-bezier(0, 0, 0.21, 1);
+  transition: opacity 0.333s cubic-bezier(0, 0, 0.21, 1);
+}
+
+.dialog-container--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.dialog {
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 14px rgba(0, 0, 0, 0.24), 0 14px 28px rgba(0, 0, 0, 0.48);
+  min-width: 280px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%) translateY(30px);
+  transform: translate(-50%, -50%) translateY(30px);
+  -webkit-transition: -webkit-transform 0.333s cubic-bezier(0, 0, 0.21, 1) 0.05s;
+  transition: -webkit-transform 0.333s cubic-bezier(0, 0, 0.21, 1) 0.05s;
+  transition: transform 0.333s cubic-bezier(0, 0, 0.21, 1) 0.05s;
+  transition: transform 0.333s cubic-bezier(0, 0, 0.21, 1) 0.05s,
+    -webkit-transform 0.333s cubic-bezier(0, 0, 0.21, 1) 0.05s;
+  padding: 24px;
+}
+
+.card {
+  padding: 16px;
+  position: relative;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 2px;
+  margin: 16px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.team-card .name {
+  font-size: 1.75em;
+}
+
+.team-card .updatedAt,
+.team-card .description {
+  font-size: 1.25em;
+  margin: 10px 0px;
+}
+
+.team-card .current {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.team-card .current .icon {
+  width: 128px;
+  height: 128px;
+}
+.team-card .current .league {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 4em;
+}
+.team-card .current .league,
+.team-card .current .description {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+.team-card .current .wins:before {
+  content: 'Wins: ';
+  color: #888;
+}
+.team-card .current .draws:before {
+  content: 'Draws: ';
+  color: #888;
+}
+.team-card .current .losses:before {
+  content: 'Losses: ';
+  color: #888;
+}
+.team-card .current .goaldiff:before {
+  content: 'Goal Diff: ';
+  color: #888;
+}
+
+.team-card .history {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 20px;
+}
+.team-card .history .competition {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  text-align: center;
+}
+.team-card .history .competition .icon {
+  width: 64px;
+  height: 64px;
+  margin: 5px auto;
+}
+
+.team-card .icon {
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.team-card .icon.barca {
+  background-image: url('/images/barca.png');
+}
+.team-card .icon.liverpool {
+  background-image: url('/images/liverpool.png');
+}
+.team-card .icon.lazio {
+  background-image: url('/images/lazio.png');
+}
+.team-card .icon.dortmund {
+  background-image: url('/images/dortmund.png');
+}
+.team-card .icon.laliga {
+  background-image: url('/images/laliga.png');
+}
+.team-card .icon.delrey {
+  background-image: url('/images/delrey.png');
+}
+.team-card .icon.epl {
+  background-image: url('/images/epl.png');
+}
+.team-card .icon.facup {
+  background-image: url('/images/facup.png');
+}
+.team-card .icon.seriea {
+  background-image: url('/images/seriea.png');
+}
+.team-card .icon.coppa {
+  background-image: url('/images/coppa.png');
+}
+.team-card .icon.bundes {
+  background-image: url('/images/bundes.png');
+}
+.team-card .icon.dfb {
+  background-image: url('/images/dfb.png');
+}
+.team-card .icon.ucl {
+  background-image: url('/images/ucl.png');
+}
+.team-card .icon.uefa {
+  background-image: url('/images/uefa.png');
+}
+.team-card .icon.fifa {
+  background-image: url('/images/fifa.png');
+}
+
+@media (max-width: 450px) {
+  .team-card .updatedAt,
+  .team-card .description {
+    font-size: 0.9em;
+  }
+  .team-card .current .icon {
+    width: 96px;
+    height: 96px;
+  }
+  .team-card .current .league {
+    font-size: 3em;
+  }
+  .team-card .future .oneday .icon {
+    width: 32px;
+    height: 32px;
   }
 }

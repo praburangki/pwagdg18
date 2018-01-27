@@ -15,6 +15,76 @@
     <button id="btnAdd" class="headerButton" aria-label="Add"></button>
   </header>
 
+  <main class="main">
+    <div class="card cardTemplate team-card" hidden>
+      <div class="name"></div>
+      <div class="updatedAt">
+        Updated at:
+        <span class="value"></span>
+      </div>
+      <div class="description">Current Position:</div>
+      <div class="current">
+        <div class="league">
+          <div class="icon"></div>
+          <div class="position"></div>
+        </div>
+        <div class="description">
+          <div class="wins"></div>
+          <div class="losses"></div>
+          <div class="draws"></div>
+          <div class="goaldiff"></div>
+        </div>
+      </div>
+      <div class="history">
+        <div class="competition">
+          <div class="title"></div>
+          <div class="icon"></div>
+          <div class="total"></div>
+        </div>
+        <div class="competition">
+          <div class="title"></div>
+          <div class="icon"></div>
+          <div class="total"></div>
+        </div>
+        <div class="competition">
+          <div class="title"></div>
+          <div class="icon"></div>
+          <div class="total"></div>
+        </div>
+        <div class="competition">
+          <div class="title"></div>
+          <div class="icon"></div>
+          <div class="total"></div>
+        </div>
+        <div class="competition">
+          <div class="title"></div>
+          <div class="icon"></div>
+          <div class="total"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="dialog-container">
+    <div class="dialog">
+      <div class="dialog-title">Add new team</div>
+      <div class="dialog-body">
+        <select id="selectTeamToAdd">
+          <option value="liverpool">Liverpool</option>
+          <option value="lazio">Lazio</option>
+          <option value="dortmund">Borussia Dortmund</option>
+          <option value="realmadrid">Real Madrid</option>
+          <option value="psg">Paris Saint Germain</option>
+          <option value="porto">Porto</option>
+        </select>
+      </div>
+      <div class="dialog-buttons">
+        <button id="butAddTeam" class="button">Add</button>
+        <button id="butAddCancel" class="button">Cancel</button>
+      </div>
+    </div>
+  </div>
+
   <div class="loader">
     <svg viewBox="0 0 32 32" width="72" height="72">
       <circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
