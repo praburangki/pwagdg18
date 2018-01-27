@@ -60,9 +60,9 @@
     var select = document.getElementById('selectTeamToAdd');
     var selected = select.options[select.selectedIndex];
     var key = selected.value;
-    var label = selected.textContent;
-    app.getTeam(key, label);
-    app.selectedTeams.push({ key: key, label: label });
+    var name = selected.textContent;
+    app.getTeam(key, name);
+    app.selectedTeams.push({ key: key, name: name });
     app.toggleAddDialog(false);
   });
 
@@ -93,7 +93,7 @@
    ****************************************************************************/
 
   // Gets a team for a specific name and update the card with the data
-  app.getTeam = function(key, label) {
+  app.getTeam = function(key, name) {
     var url = apiBase + key + '.json';
     // Make the XHR to get the data, then update the card
     var request = new XMLHttpRequest();
@@ -102,7 +102,7 @@
         if (request.status === 200) {
           var response = JSON.parse(request.response);
           response.key = key;
-          response.label = label;
+          response.name = name;
           app.updateTeamCard(response);
         }
       }
