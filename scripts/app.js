@@ -13,7 +13,7 @@
   };
 
   var injectedTeam = {
-    key: 'barcelona',
+    key: 'barca',
     name: 'Barcelona, FCB',
     icon: 'barca',
     currently: {
