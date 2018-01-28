@@ -17,7 +17,7 @@
     name: 'Barcelona, FCB',
     icon: 'barca',
     currently: {
-      updatedAt: 1453489481,
+      updatedAt: 1517059723,
       position: '1st',
       wins: 16,
       draws: 3,
@@ -63,6 +63,7 @@
     var name = selected.textContent;
     app.getTeam(key, name);
     app.selectedTeams.push({ key: key, name: name });
+    app.saveSelectedTeams();
     app.toggleAddDialog(false);
   });
 
@@ -95,6 +96,18 @@
   // Gets a team for a specific name and update the card with the data
   app.getTeam = function(key, name) {
     var url = apiBase + key + '.json';
+    // Update Me
+    if ('caches' in window) { // check if caches exists in browser
+      caches.match(url).then(function(response) { // request data from cache
+        if (response) { // update team with response
+          response.json().then(function(json) {
+            json.key = key;
+            json.name = name;
+            app.updateTeamCard(json);
+          });
+        }
+      });
+    }
     // Make the XHR to get the data, then update the card
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
@@ -119,6 +132,10 @@
     });
   };
 
+  app.saveSelectedTeams = function() {
+    window.localforage.setItem('selectedTeams', app.selectedTeams);
+  }
+
   app.updateTeamCard = function(data) {
     var card = app.visibleCards[data.key];
 
@@ -131,7 +148,15 @@
       app.visibleCards[data.key] = card;
     }
 
-    card.querySelector('.updatedAt .value').textContent = new Date(
+    // Update me
+    // Verify data is newer than what we already have, if not, skip.
+    var dateElem = card.querySelector('.updatedAt .value');
+    if (dateElem.getAttribute('data-dt') >= data.currently.updatedAt) {
+      return;
+    }
+
+    dateElem.setAttribute('data-dt', data.currently.updatedAt);
+    dateElem.textContent = new Date(
       data.currently.updatedAt * 1000
     );
     card.querySelector('.current .icon').classList.add(data.icon);
@@ -158,5 +183,30 @@
       app.isLoading = false;
     }
   };
-  // app.updateTeamCard(injectedTeam);
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    window.localforage.getItem('selectedTeams', function(err, teamList) {
+      if (teamList) {
+        app.selectedTeams = teamList;
+        app.selectedTeams.forEach(function(team) {
+          app.getTeam(team.key, team.name);
+        });
+      } else {
+        app.updateTeamCard(injectedTeam);
+        app.selectedTeams = [
+          { key: injectedTeam.key, name: injectedTeam.name }
+        ];
+        app.saveSelectedTeams();
+      }
+    });
+  });
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+      .register('/sw.js')
+      .then(function() {
+        console.log('Service Worker Registered');
+      });
+  }
+
 })();

@@ -333,38 +333,20 @@ body {
 .team-card .icon.barca {
   background-image: url('/images/barca.png');
 }
-.team-card .icon.liverpool {
-  background-image: url('/images/liverpool.png');
+.team-card .icon.realmadrid {
+  background-image: url('/images/realmadrid.png');
 }
-.team-card .icon.lazio {
-  background-image: url('/images/lazio.png');
+.team-card .icon.valencia {
+  background-image: url('/images/valencia.png');
 }
-.team-card .icon.dortmund {
-  background-image: url('/images/dortmund.png');
+.team-card .icon.atletico {
+  background-image: url('/images/atletico.png');
 }
 .team-card .icon.laliga {
   background-image: url('/images/laliga.png');
 }
 .team-card .icon.delrey {
   background-image: url('/images/delrey.png');
-}
-.team-card .icon.epl {
-  background-image: url('/images/epl.png');
-}
-.team-card .icon.facup {
-  background-image: url('/images/facup.png');
-}
-.team-card .icon.seriea {
-  background-image: url('/images/seriea.png');
-}
-.team-card .icon.coppa {
-  background-image: url('/images/coppa.png');
-}
-.team-card .icon.bundes {
-  background-image: url('/images/bundes.png');
-}
-.team-card .icon.dfb {
-  background-image: url('/images/dfb.png');
 }
 .team-card .icon.ucl {
   background-image: url('/images/ucl.png');

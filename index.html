@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="manifest" href="/manifest.json">
   <title>Football App</title>
   <meta name="description" content="Football App for GDG18">
   <link rel="stylesheet" type="text/css" href="/styles/styles.css">
@@ -20,7 +21,7 @@
       <div class="name"></div>
       <div class="updatedAt">
         Updated at:
-        <span class="value"></span>
+        <span class="value" data-dt="0"></span>
       </div>
       <div class="description">Current Position:</div>
       <div class="current">
@@ -89,5 +90,6 @@
   </div>
 
   <script src="/scripts/app.js"></script>
+  <script src="/scripts/localforage-1.4.0.js"></script>
 </body>
 </html>
